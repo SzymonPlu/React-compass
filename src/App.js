@@ -23,7 +23,7 @@ const App = () => {
     <div className="App">
       {/* Kompas */}
       <div className="compass-container">
-        <img src="/compas.png" alt="Kompas" className="compass-icon" />
+      <img src={process.env.PUBLIC_URL + "/compas.png"} alt="Kompas" className="compass-icon" />
         <span className="azimuth-value">{azimuth}°</span>
       </div>
 
@@ -32,7 +32,7 @@ const App = () => {
         className="background"
         style={{ transform: `scale(${zoom})` }}
       >
-        <img src="/mapa-suliszowice.jpg" alt="mapa suliszowice" className="background-image" />
+        <img src={process.env.PUBLIC_URL + "/mapa-suliszowice.jpg"} alt="mapa suliszowice" className="background-image" />
       </div>
 
       {/* Przyciski zoomu */}
