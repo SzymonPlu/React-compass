@@ -4,6 +4,7 @@ import './App.css';
 const App = () => {
   const [zoom, setZoom] = useState(1); // Poziom zoomu
   const [azimuth, setAzimuth] = useState(0); // Azymut w stopniach
+  const [heading, setHeading] = useState(null); // Kąt względem północy
 
   // Używamy useEffect do nasłuchiwania zmiany orientacji urządzenia
   useEffect(() => {
@@ -21,6 +22,22 @@ const App = () => {
 
   return (
     <div className="App">
+      {/* Kompas */}
+      <div className="compass-container">
+        {/* Obrót strzałki kompasu względem azymutu (wskazuje na prawdziwą północ) */}
+        <img 
+          src={process.env.PUBLIC_URL + "/compas.png"} 
+          alt="Kompas"
+          className="compass-icon"
+          style={{ transform: `rotate(${-azimuth}deg)` }} // Obrót w zależności od azymutu
+        />
+        {/* Czerwona strzałka wskazująca północ */}
+        <div className="north-arrow" style={{ transform: `rotate(${azimuth}deg)` }}></div>
+        
+        {/* Wyświetlamy aktualny azymut */}
+        <span className="azimuth-value">{Math.round(azimuth)}°</span>
+      </div>
+
       {/* Tło */}
       <div
         className="background"
@@ -29,21 +46,8 @@ const App = () => {
         <img src={process.env.PUBLIC_URL + "/mapa-suliszowice.jpg"} alt="mapa suliszowice" className="background-image" />
       </div>
 
-      {/* Kompas przyklejony do górnego prawego rogu */}
-      <div className="compass-container" style={{ position: 'absolute', top: 20, right: 20 }}>
-        {/* Obrót strzałki kompasu względem azymutu (poprawka na prawdziwą północ) */}
-        <img 
-          src={process.env.PUBLIC_URL + "/compas.png"} 
-          alt="Kompas"
-          className="compass-icon"
-          style={{ transform: `rotate(${-azimuth}deg)`, width: '50px', height: '50px' }} // Obrót w zależności od azymutu
-        />
-        {/* Wyświetlamy aktualny azymut */}
-        <span className="azimuth-value" style={{ color: 'red', fontSize: '20px' }}>{Math.round(azimuth)}°</span>
-      </div>
-
       {/* Przyciski zoomu */}
-      <div className="zoom-controls" style={{ position: 'absolute', bottom: 20, left: '50%' }}>
+      <div className="zoom-controls">
         <button onClick={handleZoomIn}>+</button>
         <button onClick={handleZoomOut}>-</button>
       </div>

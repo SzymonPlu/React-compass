@@ -25,16 +25,26 @@
 }
 
 .compass-icon {
-  width: 80px; /* Mniejszy rozmiar kompasu */
-  height: 80px; /* Mniejszy rozmiar kompasu */
-  transition: transform 0.1s ease-in-out; /* Płynny efekt obracania */
+  width: 150px; /* Zwiększenie rozmiaru kompasu */
+  height: 150px; /* Zwiększenie rozmiaru kompasu */
+  transition: transform 0.1s ease-in-out; /* Płynne obracanie */
+}
+
+.north-arrow {
+  position: absolute;
+  top: 60px; /* Wskazówka strzałki poniżej kompasu */
+  width: 30px;
+  height: 30px;
+  background-color: red; /* Kolor strzałki na czerwono */
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%); /* Tworzy trójkątną strzałkę */
+  z-index: 15;
 }
 
 .azimuth-value {
-  font-size: 18px; /* Zmniejszenie rozmiaru wartości azymutu */
-  margin-top: 5px; /* Mniejszy odstęp między kompasem a wartością azymutu */
+  font-size: 24px; /* Zwiększenie rozmiaru wartości azymutu */
+  margin-top: 10px; /* Dodanie odstępu między kompasem a wartością azymutu */
   font-weight: bold;
-  color: #333;
+  color: #333; /* Kolor tekstu */
 }
 
 .background {
