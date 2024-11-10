@@ -78,7 +78,7 @@ const App = () => {
       {/* Tło, skalowanie tylko tła */}
       <div
         className="background"
-        style={{ transform: `scale(${zoom})` }}
+        style={{ transform: `scale(${zoom})` }}  
       >
         <img src={process.env.PUBLIC_URL + "/mapa_suli_topo.png"} alt="mapa suliszowice" className="background-image" />
       </div>
