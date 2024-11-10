@@ -1,3 +1,4 @@
+// App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
@@ -5,11 +6,10 @@ const App = () => {
   const [zoom, setZoom] = useState(1); // Poziom zoomu
   const [azimuth, setAzimuth] = useState(0); // Azymut w stopniach
 
-  // Używamy useEffect do nasłuchiwania zmiany orientacji urządzenia
   useEffect(() => {
     const handleOrientation = (event) => {
-      const alpha = event.alpha; // Azymut w stopniach (wskazuje kąt względem północy)
-      if (alpha !== null) setAzimuth(alpha); // Ustawiamy azymut
+      const alpha = event.alpha;
+      if (alpha !== null) setAzimuth(Math.round(alpha));
     };
 
     window.addEventListener('deviceorientation', handleOrientation);
@@ -23,15 +23,8 @@ const App = () => {
     <div className="App">
       {/* Kompas */}
       <div className="compass-container">
-        {/* Obrót strzałki kompasu względem azymutu (poprawka na prawdziwą północ) */}
-        <img 
-          src={process.env.PUBLIC_URL + "/compas.png"} 
-          alt="Kompas"
-          className="compass-icon"
-          style={{ transform: `rotate(${-azimuth}deg)` }} // Obrót w zależności od azymutu
-        />
-        {/* Wyświetlamy aktualny azymut */}
-        <span className="azimuth-value">{Math.round(azimuth)}°</span>
+      <img src={process.env.PUBLIC_URL + "/compas.png"} alt="Kompas" className="compass-icon" />
+        <span className="azimuth-value">{azimuth}°</span>
       </div>
 
       {/* Tło */}
