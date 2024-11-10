@@ -59,7 +59,7 @@ const App = () => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Kompas (przyklejony w prawym górnym rogu) */}
+      {/* Kompas (przyklejony w prawym górnym rogu, nie podlega zoomowi) */}
       <div className="compass-container">
         {/* Obrót strzałki kompasu względem azymutu (wskazuje na prawdziwą północ) */}
         <img 
