@@ -59,28 +59,31 @@ const App = () => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Kompas (przyklejony w prawym górnym rogu, nie podlega zoomowi) */}
-      <div className="compass-container">
-        {/* Obrót strzałki kompasu względem azymutu (wskazuje na prawdziwą północ) */}
-        <img 
-          src={process.env.PUBLIC_URL + "/compas.png"} 
-          alt="Kompas"
-          className="compass-icon"
-          style={{ transform: `rotate(${-azimuth}deg)` }} // Obrót w zależności od azymutu
-        />
-        {/* Czerwona strzałka wskazująca północ */}
-        <div className="north-arrow" style={{ transform: `rotate(${azimuth}deg)` }}></div>
-        
-        {/* Wyświetlamy aktualny azymut */}
-        <span className="azimuth-value">{Math.round(azimuth)}°</span>
-      </div>
+      {/* Kontener z tłem i kompasem */}
+      <div className="map-container">
+        {/* Kompas */}
+        <div className="compass-container">
+          {/* Obrót strzałki kompasu względem azymutu (wskazuje na prawdziwą północ) */}
+          <img 
+            src={process.env.PUBLIC_URL + "/compas.png"} 
+            alt="Kompas"
+            className="compass-icon"
+            style={{ transform: `rotate(${-azimuth}deg)` }} // Obrót w zależności od azymutu
+          />
+          {/* Czerwona strzałka wskazująca północ */}
+          <div className="north-arrow" style={{ transform: `rotate(${azimuth}deg)` }}></div>
+          
+          {/* Wyświetlamy aktualny azymut */}
+          <span className="azimuth-value">{Math.round(azimuth)}°</span>
+        </div>
 
-      {/* Tło, skalowanie tylko tła */}
-      <div
-        className="background"
-        style={{ transform: `scale(${zoom})` }}  
-      >
-        <img src={process.env.PUBLIC_URL + "/mapa_suli_topo.png"} alt="mapa suliszowice" className="background-image" />
+        {/* Tło, skalowanie tylko tła */}
+        <div
+          className="background"
+          style={{ transform: `scale(${zoom})` }}  
+        >
+          <img src={process.env.PUBLIC_URL + "/mapa_suli_topo.png"} alt="mapa suliszowice" className="background-image" />
+        </div>
       </div>
 
       {/* Przyciski zoomu */}
