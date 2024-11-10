@@ -25,15 +25,16 @@
 }
 
 .compass-icon {
-  width: 150px; /* Zwiększenie rozmiaru kompasu */
-  height: 150px; /* Zwiększenie rozmiaru kompasu */
+  width: 80px; /* Mniejszy rozmiar kompasu */
+  height: 80px; /* Mniejszy rozmiar kompasu */
+  transition: transform 0.1s ease-in-out; /* Płynny efekt obracania */
 }
 
 .azimuth-value {
-  font-size: 24px; /* Zwiększenie rozmiaru wartości azymutu */
-  margin-top: 10px; /* Dodanie odstępu między kompasem a wartością azymutu */
+  font-size: 18px; /* Zmniejszenie rozmiaru wartości azymutu */
+  margin-top: 5px; /* Mniejszy odstęp między kompasem a wartością azymutu */
   font-weight: bold;
-  color: #333; /* Zmiana koloru tekstu */
+  color: #333;
 }
 
 .background {
@@ -41,18 +42,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .background-image {
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Wypełnia tło, zachowując proporcje */
 }
 
 .zoom-controls {
   position: absolute;
   bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%); /* Wyśrodkowanie przycisków */
   display: flex;
   gap: 10px;
+  z-index: 10; /* Przyciski na wierzchu */
 }
 
 .zoom-controls button {
