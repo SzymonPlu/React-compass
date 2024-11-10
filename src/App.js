@@ -42,7 +42,7 @@ const App = () => {
         className="background"
         style={{ transform: `scale(${zoom})` }}
       >
-        <img src={process.env.PUBLIC_URL + "/mapa-suliszowice.jpg"} alt="mapa suliszowice" className="background-image" />
+        <img src={process.env.PUBLIC_URL + "/mapa_suli_topo.png"} alt="mapa suliszowice" className="background-image" />
       </div>
 
       {/* Przyciski zoomu */}
