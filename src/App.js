@@ -4,7 +4,6 @@ import './App.css';
 const App = () => {
   const [zoom, setZoom] = useState(1); // Poziom zoomu
   const [azimuth, setAzimuth] = useState(0); // Azymut w stopniach
-  const [heading, setHeading] = useState(null); // Kąt względem północy
 
   // Używamy useEffect do nasłuchiwania zmiany orientacji urządzenia
   useEffect(() => {
