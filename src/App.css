@@ -24,7 +24,7 @@
 }
 
 .compass-icon {
-  width: 150px;
+  width: 150px; /* Stały rozmiar kompasu */
   height: 150px;
   transition: transform 0.1s ease-in-out;
 }

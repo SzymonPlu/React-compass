@@ -21,7 +21,7 @@ const App = () => {
 
   return (
     <div className="App">
-      {/* Kompas */}
+      {/* Kompas (przyklejony w prawym górnym rogu) */}
       <div className="compass-container">
         {/* Obrót strzałki kompasu względem azymutu (wskazuje na prawdziwą północ) */}
         <img 
@@ -37,7 +37,7 @@ const App = () => {
         <span className="azimuth-value">{Math.round(azimuth)}°</span>
       </div>
 
-      {/* Tło */}
+      {/* Tło, skalowanie tylko tła */}
       <div
         className="background"
         style={{ transform: `scale(${zoom})` }}
