@@ -48,6 +48,23 @@ const App = () => {
       setZoom(newZoom);
       zoomRef.current = newZoom;
     }
+
+    if (e.touches.length === 1) {
+      // Przesuwanie przy jednym palcu
+      const touch = e.touches[0];
+      const dx = touch.clientX - offsetX;
+      const dy = touch.clientY - offsetY;
+
+      setOffsetX(touch.clientX);
+      setOffsetY(touch.clientY);
+
+      // Ustawienie przesunięcia z uwzględnieniem granic
+      const maxOffsetX = Math.min(Math.max(offsetX + dx, -500), 500); // Przyjmujemy, że -500 to lewa granica, a 500 prawa
+      const maxOffsetY = Math.min(Math.max(offsetY + dy, -500), 500); // Przyjmujemy granice w pionie
+
+      setOffsetX(maxOffsetX);
+      setOffsetY(maxOffsetY);
+    }
   };
 
   const handleTouchEnd = () => {
@@ -63,8 +80,8 @@ const App = () => {
     >
       <div className="map-container">
         <div className="compass-container">
-          <img 
-            src={process.env.PUBLIC_URL + "/compas.png"} 
+          <img
+            src={process.env.PUBLIC_URL + "/compas.png"}
             alt="Kompas"
             className="compass-icon"
             style={{ transform: `rotate(${-azimuth}deg)` }}
