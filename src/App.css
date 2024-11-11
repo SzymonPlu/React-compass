@@ -79,7 +79,7 @@ body {
 .background-image {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Zapewnia pełne pokrycie ekranu obrazem, z przycięciem, gdy trzeba */
+  object-fit: contain; /* Zapewnia pełne pokrycie ekranu obrazem, z przycięciem, gdy trzeba */
 }
 
 .zoom-controls {
