@@ -21,10 +21,6 @@ const App = () => {
     return () => window.removeEventListener('deviceorientation', handleOrientation);
   }, []);
 
-  // Funkcja do obsługi zoomu przy użyciu przycisków
-  const handleZoomIn = () => setZoom((prev) => Math.min(prev + 0.1, 3)); // Maksymalny zoom x3
-  const handleZoomOut = () => setZoom((prev) => Math.max(prev - 0.1, 1)); // Minimalny zoom x1
-
   // Obsługa gestu przybliżania (pinch zoom)
   const handleTouchStart = (e) => {
     if (e.touches.length === 2) {
@@ -81,12 +77,6 @@ const App = () => {
         >
           <img src={process.env.PUBLIC_URL + "/mapa_suli_topo.png"} alt="mapa suliszowice" className="background-image" />
         </div>
-      </div>
-
-      {/* Przyciski zoomu */}
-      <div className="zoom-controls">
-        <button onClick={handleZoomIn}>+</button>
-        <button onClick={handleZoomOut}>-</button>
       </div>
     </div>
   );
