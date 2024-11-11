@@ -1,42 +1,97 @@
-/* Kompas jako nakładka, która zawsze pozostaje w jednym miejscu */
-.compass-container {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 20px;
-  border-radius: 50%;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+/* Globalne ustawienia */
+* {
+  box-sizing: border-box;
 }
 
-.compass-icon {
-  width: 100px;
-  height: 100px;
+/* Kontener całej aplikacji */
+.App {
   position: relative;
-}
-
-/* Kontener na strzałkę, który obraca się zgodnie z azymutem */
-.compass-arrow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(0deg);
-  transform-origin: center center;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #f0f0f0;
 }
 
-/* Strzałka wskazująca północ */
+/* Kontener z mapą i kompasem */
+.map-container {
+  position: relative; /* Ważne, aby kompas był pozycjonowany względem tego kontenera */
+  width: 100%;
+  height: 100%;
+}
+
+/* Kompas przyklejony w prawym górnym rogu w obrębie kontenera */
+.compass-container {
+  position: absolute; /* Kompas pozycjonowany względem kontenera */
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10; /* Kompas zawsze na wierzchu */
+}
+
+.compass-icon {
+  width: 100px; /* Stały rozmiar kompasu */
+  height: 100px;
+  transition: transform 0.1s ease-in-out;
+}
+
 .north-arrow {
-  width: 10px;
-  height: 50px;
+  position: absolute;
+  top: 45px;
+  width: 15px; /* Rozmiar strzałki północnej */
+  height: 15px;
   background-color: red;
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-  transform-origin: bottom; /* Punkt obrotu u dołu strzałki */
+  z-index: 15;
+}
+
+.azimuth-value {
+  font-size: 18px;
+  margin-top: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Styl tła, które jest skalowane */
+.background {
+  transition: transform 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Przyciski zoomu */
+.zoom-controls {
   position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.zoom-controls button {
+  padding: 10px 15px;
+  font-size: 18px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.zoom-controls button:hover {
+  background-color: #555;
 }
