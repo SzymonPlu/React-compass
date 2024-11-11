@@ -18,7 +18,7 @@ body {
   position: relative;
   width: 100vw; /* Pełna szerokość ekranu */
   height: 100vh; /* Pełna wysokość ekranu */
-  overflow: hidden; /* Ukrywa nadmiar obrazu, który wykracza poza ekran */
+  overflow: visible; /* Zmieniamy na visible, aby umożliwić przesuwanie */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,14 +71,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 100%; /* Zapewnia, że obraz nie będzie szerszy niż szerokość ekranu */
-  max-height: 100%; /* Zapewnia, że obraz nie będzie wyższy niż wysokość ekranu */
+  width: 100%; /* Pełna szerokość kontenera */
+  height: 100%; /* Pełna wysokość kontenera */
+  position: relative;
 }
 
 .background-image {
-  object-fit: contain; /* Zapewnia pełne widoczność obrazu bez przycinania, pasuje do ekranu */
-  max-width: 100%;
-  max-height: 100%;
+  object-fit: contain; /* Zapewnia pełną widoczność obrazu, bez przycinania */
+  transition: transform 0.3s ease; /* Dodano płynne przejście dla transformacji */
+  position: absolute; /* Pozycjonowanie absolutne, aby móc łatwiej przesuwać */
 }
 
 .zoom-controls {
