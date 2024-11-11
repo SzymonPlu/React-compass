@@ -18,8 +18,6 @@ body {
   position: relative;
   width: 100vw; /* Pełna szerokość ekranu */
   height: 100vh; /* Pełna wysokość ekranu */
-  overflow: hidden; /* Ukrywa nadmiar obrazu, który wykracza poza ekran */
-  touch-action: none; /* Zapobiega przewijaniu strony podczas interakcji dotykowych */
   display: flex;
   justify-content: center;
   align-items: center;
