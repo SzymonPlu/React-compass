@@ -6,6 +6,8 @@ const App = () => {
   const [azimuth, setAzimuth] = useState(0); // Azymut w stopniach
   const [startDistance, setStartDistance] = useState(0); // Odległość początkowa między dwoma palcami
   const [initialZoom, setInitialZoom] = useState(1); // Początkowy poziom zoomu
+  const [offsetX, setOffsetX] = useState(0); // Przesunięcie w osi X
+  const [offsetY, setOffsetY] = useState(0); // Przesunięcie w osi Y
   const zoomRef = useRef(1); // Referencja do poziomu zoomu
 
   // Używamy useEffect do nasłuchiwania zmiany orientacji urządzenia
@@ -22,6 +24,12 @@ const App = () => {
   // Funkcja do obsługi zoomu przy użyciu przycisków
   const handleZoomIn = () => setZoom((prev) => Math.min(prev + 0.1, 3)); // Maksymalny zoom x3
   const handleZoomOut = () => setZoom((prev) => Math.max(prev - 0.1, 1)); // Minimalny zoom x1
+
+  // Funkcje przesuwania mapy
+  const handlePanLeft = () => setOffsetX((prev) => prev + 20);
+  const handlePanRight = () => setOffsetX((prev) => prev - 20);
+  const handlePanUp = () => setOffsetY((prev) => prev + 20);
+  const handlePanDown = () => setOffsetY((prev) => prev - 20);
 
   // Obsługa gestu przybliżania (pinch zoom)
   const handleTouchStart = (e) => {
@@ -59,37 +67,39 @@ const App = () => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Kontener z tłem i kompasem */}
       <div className="map-container">
-        {/* Kompas */}
         <div className="compass-container">
-          {/* Obrót strzałki kompasu względem azymutu (wskazuje na prawdziwą północ) */}
           <img 
             src={process.env.PUBLIC_URL + "/compas.png"} 
             alt="Kompas"
             className="compass-icon"
-            style={{ transform: `rotate(${-azimuth}deg)` }} // Obrót w zależności od azymutu
+            style={{ transform: `rotate(${-azimuth}deg)` }}
           />
-          {/* Czerwona strzałka wskazująca północ */}
           <div className="north-arrow" style={{ transform: `rotate(${azimuth}deg)` }}></div>
-          
-          {/* Wyświetlamy aktualny azymut */}
           <span className="azimuth-value">{Math.round(azimuth)}°</span>
         </div>
 
-        {/* Tło, skalowanie tylko tła */}
         <div
           className="background"
-          style={{ transform: `scale(${zoom})` }}  
+          style={{
+            transform: `scale(${zoom}) translate(${offsetX}px, ${offsetY}px)`,
+          }}
         >
           <img src={process.env.PUBLIC_URL + "/mapa_suli_topo.png"} alt="mapa suliszowice" className="background-image" />
         </div>
       </div>
 
-      {/* Przyciski zoomu */}
-      <div className="zoom-controls">
-        <button onClick={handleZoomIn}>+</button>
-        <button onClick={handleZoomOut}>-</button>
+      {/* Przyciski zoomu i przesuwania */}
+      <div className="pan-controls">
+        <button onClick={handlePanUp}>▲</button>
+        <div className="zoom-controls">
+          <button onClick={handleZoomIn}>+</button>
+          <button onClick={handleZoomOut}>-</button>
+        </div>
+        <button onClick={handlePanDown}>▼</button>
+        <button onClick={handlePanLeft}>◄</button>
+        <div></div>
+        <button onClick={handlePanRight}>►</button>
       </div>
     </div>
   );
