@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
 const App = () => {
-  const [zoom, setZoom] = useState(1); // Poziom zoomu
+  const [zoom, setZoom] = useState(1); // Początkowy poziom zoomu ustawiamy na 1
   const [azimuth, setAzimuth] = useState(0); // Azymut w stopniach
   const [startDistance, setStartDistance] = useState(0); // Odległość początkowa między dwoma palcami
   const [initialZoom, setInitialZoom] = useState(1); // Początkowy poziom zoomu
@@ -41,7 +41,7 @@ const App = () => {
         e.touches[0].clientY - e.touches[1].clientY
       );
       const zoomChange = (distance - startDistance) / 300;
-      const newZoom = Math.min(Math.max(initialZoom + zoomChange, 1), 3);
+      const newZoom = Math.min(Math.max(initialZoom + zoomChange, 1), 3); // Maksymalny zoom = 3
       setZoom(newZoom);
       zoomRef.current = newZoom;
     } else if (e.touches.length === 1) {
@@ -56,23 +56,6 @@ const App = () => {
   const handleTouchEnd = () => {
     setStartDistance(0);
   };
-
-  // Funkcja ograniczająca przesunięcie mapy, aby nie wykraczała poza ekran
-  const constrainOffset = () => {
-    if (mapRef.current) {
-      const mapWidth = mapRef.current.offsetWidth * zoom;
-      const mapHeight = mapRef.current.offsetHeight * zoom;
-      const maxOffsetX = Math.max(0, mapWidth - window.innerWidth);
-      const maxOffsetY = Math.max(0, mapHeight - window.innerHeight);
-
-      setOffsetX(Math.min(Math.max(offsetX, -maxOffsetX), 0));
-      setOffsetY(Math.min(Math.max(offsetY, -maxOffsetY), 0));
-    }
-  };
-
-  useEffect(() => {
-    constrainOffset();
-  }, [zoom, offsetX, offsetY]); // Wywołujemy za każdym razem, gdy zmienia się zoom lub przesunięcie
 
   return (
     <div
@@ -97,7 +80,8 @@ const App = () => {
           ref={mapRef}
           className="background"
           style={{
-            transform: `scale(${zoom}) translate(${offsetX}px, ${offsetY}px)`,
+            transform: `scale(${zoom}) translate(${offsetX}px, ${offsetY}px)`, // Skalowanie i przesuwanie
+            transition: 'transform 0.2s ease', // Płynna animacja dla transformacji
           }}
         >
           <img
