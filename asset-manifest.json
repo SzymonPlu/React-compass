@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/React-compass/static/css/main.d20e2729.css",
+    "main.css": "/React-compass/static/css/main.023fb260.css",
     "main.js": "/React-compass/static/js/main.dcba2e78.js",
     "static/js/453.f1668e20.chunk.js": "/React-compass/static/js/453.f1668e20.chunk.js",
     "index.html": "/React-compass/index.html",
-    "main.d20e2729.css.map": "/React-compass/static/css/main.d20e2729.css.map",
+    "main.023fb260.css.map": "/React-compass/static/css/main.023fb260.css.map",
     "main.dcba2e78.js.map": "/React-compass/static/js/main.dcba2e78.js.map",
     "453.f1668e20.chunk.js.map": "/React-compass/static/js/453.f1668e20.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d20e2729.css",
+    "static/css/main.023fb260.css",
     "static/js/main.dcba2e78.js"
   ]
 }
