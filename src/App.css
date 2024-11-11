@@ -9,7 +9,6 @@ body {
   height: 100vh;
   margin: 0;
   background-color: #fff; /* Ustawienie białego tła wokół */
-  background-image: url('twoje-tlo.jpg'); /* Ścieżka do pliku obrazu tła */
   background-position: center center; /* Wyśrodkowanie obrazu */
   background-repeat: no-repeat; /* Zapobiega powtarzaniu się obrazu */
   background-size: cover; /* Zapewnia pełne pokrycie ekranu obrazem */
@@ -18,7 +17,7 @@ body {
 .App {
   position: relative;
   height: 100vh; /* pełna wysokość ekranu */
-  overflow: hidden; /* Zapobiega przewijaniu */
+  overflow: auto; /* Zezwolenie na przewijanie */
   display: flex;
   justify-content: center;
   align-items: center;
