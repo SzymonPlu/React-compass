@@ -4,16 +4,15 @@ import './App.css';
 const App = () => {
   const [zoom, setZoom] = useState(1); // Początkowy poziom zoomu
   const [azimuth, setAzimuth] = useState(0); // Azymut w stopniach
-  const [startDistance, setStartDistance] = useState(0); // Odległość początkowa między dwoma palcami
-  const [initialZoom, setInitialZoom] = useState(1); // Początkowy poziom zoomu
   const mapRef = useRef(null); // Referencja do mapy
   const initialOffset = useRef({ x: 0, y: 0 }); // Pozycja początkowa przesunięcia przy dotyku
   const currentOffset = useRef({ x: 0, y: 0 }); // Obecna pozycja przesunięcia
+  const startDistance = useRef(0); // Odległość początkowa między dwoma palcami
+  const initialZoom = useRef(1); // Początkowy poziom zoomu
 
-  // Ustawienia azymutu w oparciu o orientację urządzenia
   useEffect(() => {
     const handleOrientation = (event) => {
-      const alpha = event.alpha; // Azymut w stopniach
+      const alpha = event.alpha;
       if (alpha !== null) setAzimuth(alpha);
     };
 
@@ -21,15 +20,14 @@ const App = () => {
     return () => window.removeEventListener('deviceorientation', handleOrientation);
   }, []);
 
-  // Obsługa dotyku - rozpoczęcie gestu
   const handleTouchStart = (e) => {
     if (e.touches.length === 2) {
       const distance = Math.hypot(
         e.touches[0].clientX - e.touches[1].clientX,
         e.touches[0].clientY - e.touches[1].clientY
       );
-      setStartDistance(distance);
-      setInitialZoom(zoom);
+      startDistance.current = distance;
+      initialZoom.current = zoom;
     } else if (e.touches.length === 1) {
       initialOffset.current = {
         x: e.touches[0].clientX - currentOffset.current.x,
@@ -38,32 +36,27 @@ const App = () => {
     }
   };
 
-  // Obsługa dotyku - przesuwanie lub przybliżanie mapy
   const handleTouchMove = (e) => {
     if (e.touches.length === 2) {
-      // Przybliżanie
       const distance = Math.hypot(
         e.touches[0].clientX - e.touches[1].clientX,
         e.touches[0].clientY - e.touches[1].clientY
       );
-      const zoomChange = (distance - startDistance) / 300;
-      const newZoom = Math.min(Math.max(initialZoom + zoomChange, 1), 3);
-      setZoom(newZoom);
+      const zoomChange = (distance - startDistance.current) / 300;
+      const newZoom = Math.min(Math.max(initialZoom.current + zoomChange, 1), 3);
+      mapRef.current.style.transform = `scale(${newZoom}) translate(${currentOffset.current.x}px, ${currentOffset.current.y}px)`;
+      setZoom(newZoom); // aktualizujemy rzadziej, dla płynności
     } else if (e.touches.length === 1) {
-      // Przesuwanie
       const deltaX = e.touches[0].clientX - initialOffset.current.x;
       const deltaY = e.touches[0].clientY - initialOffset.current.y;
 
-      // Aktualizujemy bieżące przesunięcie
       currentOffset.current = { x: deltaX, y: deltaY };
-
-      // Aktualizujemy styl mapy bezpośrednio, aby zapewnić płynność
       mapRef.current.style.transform = `scale(${zoom}) translate(${deltaX}px, ${deltaY}px)`;
     }
   };
 
   const handleTouchEnd = () => {
-    setStartDistance(0); // Resetujemy startDistance po zakończeniu dotyku
+    startDistance.current = 0;
   };
 
   return (
@@ -85,13 +78,7 @@ const App = () => {
           <span className="azimuth-value">{Math.round(azimuth)}°</span>
         </div>
 
-        <div
-          ref={mapRef}
-          className="background"
-          style={{
-            transform: `scale(${zoom})`, // Tylko skalowanie początkowe
-          }}
-        >
+        <div ref={mapRef} className="background">
           <img
             src={process.env.PUBLIC_URL + "/mapa_suli_topo.png"}
             alt="mapa suliszowice"
