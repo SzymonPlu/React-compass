@@ -5,14 +5,24 @@
   padding: 0;
 }
 
+body {
+  height: 100vh;
+  margin: 0;
+  background-color: #fff; /* Ustawienie białego tła wokół */
+  background-image: url('twoje-tlo.jpg'); /* Ścieżka do pliku obrazu tła */
+  background-position: center center; /* Wyśrodkowanie obrazu */
+  background-repeat: no-repeat; /* Zapobiega powtarzaniu się obrazu */
+  background-size: cover; /* Zapewnia pełne pokrycie ekranu obrazem */
+}
+
 .App {
   position: relative;
   height: 100vh; /* pełna wysokość ekranu */
-  overflow: hidden; /* Zapobiega przewijaniu, gdy mapa jest powiększona */
+  overflow: hidden; /* Zapobiega przewijaniu */
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0f0f0;
+  background-color: transparent; /* Tło App pozostaje przezroczyste, dzięki czemu widać obraz */
 }
 
 .map-container {
