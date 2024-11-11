@@ -68,6 +68,7 @@ body {
   overflow: hidden;
   transition: transform .3s ease;
   width: 100%
+  touch-action pinch-zoom pan-x pan-y;
 }
 
 .background-image {
