@@ -31,6 +31,10 @@ const App = () => {
       );
       setStartDistance(distance);
       setInitialZoom(zoomRef.current);
+    } else if (e.touches.length === 1) {
+      // Przechowujemy początkowe pozycje dotyku
+      setOffsetX(e.touches[0].clientX);
+      setOffsetY(e.touches[0].clientY);
     }
   };
 
@@ -45,11 +49,14 @@ const App = () => {
       setZoom(newZoom);
       zoomRef.current = newZoom;
     } else if (e.touches.length === 1) {
-      // Obsługuje przesuwanie mapy jednym palcem
+      // Obliczamy przesunięcie względem początkowego punktu dotyku
       const deltaX = e.touches[0].clientX - offsetX;
       const deltaY = e.touches[0].clientY - offsetY;
-      setOffsetX(deltaX);
-      setOffsetY(deltaY);
+      setOffsetX(e.touches[0].clientX); // Aktualizujemy nową pozycję
+      setOffsetY(e.touches[0].clientY); // Aktualizujemy nową pozycję
+      // Przemieszczamy mapę o deltaX i deltaY
+      setOffsetX(prev => prev + deltaX);
+      setOffsetY(prev => prev + deltaY);
     }
   };
 
