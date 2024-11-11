@@ -8,10 +8,11 @@
 body {
   height: 100vh;
   margin: 0;
-  background-color: #fff; /* Ustawienie białego tła wokół */ /* Ścieżka do pliku obrazu tła */
+  background-color: #fff; /* Ustawienie białego tła wokół */
+  background-image: url('twoje-tlo.jpg'); /* Ścieżka do pliku obrazu tła */
   background-position: center center; /* Wyśrodkowanie obrazu */
   background-repeat: no-repeat; /* Zapobiega powtarzaniu się obrazu */
-  background-size: 100% 100%; /* Zapewnia, że obrazek wypełni cały ekran, zachowując białe tło */
+  background-size: cover; /* Zapewnia pełne pokrycie ekranu obrazem */
 }
 
 .App {
@@ -22,7 +23,6 @@ body {
   justify-content: center;
   align-items: center;
   background-color: transparent; /* Tło App pozostaje przezroczyste, dzięki czemu widać obraz */
-  padding: 0 10%; /* Zapewnia białą przestrzeń po bokach, jeśli obrazek nie wypełnia całego ekranu */
 }
 
 .map-container {
@@ -81,7 +81,7 @@ body {
 .background-image {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Zapewnia pełne dopasowanie obrazu w widocznej przestrzeni */
+  object-fit: cover; /* Zapewnia pełne pokrycie ekranu obrazem, z przycięciem, gdy trzeba */
 }
 
 .zoom-controls {
