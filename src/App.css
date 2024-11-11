@@ -8,8 +8,7 @@
 body {
   height: 100vh;
   margin: 0;
-  background-color: #fff; /* Ustawienie białego tła wokół */
-  background-image: url('twoje-tlo.jpg'); /* Ścieżka do pliku obrazu tła */
+  background-color: #fff; /* Ustawienie białego tła wokół */ /* Ścieżka do pliku obrazu tła */
   background-position: center center; /* Wyśrodkowanie obrazu */
   background-repeat: no-repeat; /* Zapobiega powtarzaniu się obrazu */
   background-size: cover; /* Zapewnia pełne pokrycie ekranu obrazem */
