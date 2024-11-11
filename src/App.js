@@ -25,12 +25,6 @@ const App = () => {
   const handleZoomIn = () => setZoom((prev) => Math.min(prev + 0.1, 3)); // Maksymalny zoom x3
   const handleZoomOut = () => setZoom((prev) => Math.max(prev - 0.1, 1)); // Minimalny zoom x1
 
-  // Funkcje przesuwania mapy
-  const handlePanLeft = () => setOffsetX((prev) => prev + 20);
-  const handlePanRight = () => setOffsetX((prev) => prev - 20);
-  const handlePanUp = () => setOffsetY((prev) => prev + 20);
-  const handlePanDown = () => setOffsetY((prev) => prev - 20);
-
   // Obsługa gestu przybliżania (pinch zoom)
   const handleTouchStart = (e) => {
     if (e.touches.length === 2) {
@@ -89,17 +83,10 @@ const App = () => {
         </div>
       </div>
 
-      {/* Przyciski zoomu i przesuwania */}
-      <div className="pan-controls">
-        <button onClick={handlePanUp}>▲</button>
-        <div className="zoom-controls">
-          <button onClick={handleZoomIn}>+</button>
-          <button onClick={handleZoomOut}>-</button>
-        </div>
-        <button onClick={handlePanDown}>▼</button>
-        <button onClick={handlePanLeft}>◄</button>
-        <div></div>
-        <button onClick={handlePanRight}>►</button>
+      {/* Przyciski zoomu */}
+      <div className="zoom-controls">
+        <button onClick={handleZoomIn}>+</button>
+        <button onClick={handleZoomOut}>-</button>
       </div>
     </div>
   );
